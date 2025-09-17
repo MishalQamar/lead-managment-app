@@ -18,7 +18,7 @@ model Lead {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
-  status    Status   @default(new)
+  status    Status
   createdAt DateTime @default(now())
 
   @@map("leads")
