@@ -110,3 +110,5 @@ build/
 # Server-specific files
 uploads/
 temp/
+
+/generated/prisma
