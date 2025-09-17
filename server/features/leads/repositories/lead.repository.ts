@@ -1,4 +1,4 @@
-import { Status } from '../../../generated/prisma';
+import { Status } from '@prisma/client';
 import { prisma } from '../../../lib/prisma';
 
 export const leadRepository = {
