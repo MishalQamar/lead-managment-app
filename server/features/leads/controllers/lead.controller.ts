@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { z } from 'zod';
-import { Status } from '../generated/prisma';
+
 import { leadRepository } from '../repositories/lead.repository';
 import { leadSchema } from '../schema/lead';
 
