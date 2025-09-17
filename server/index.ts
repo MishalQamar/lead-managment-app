@@ -13,12 +13,18 @@ const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3000;
 
-app.get('/api/leads', (req: Request, res: Response) => {
-  res.send('Hello World');
+app.get('/api/leads', async (req: Request, res: Response) => {
+  try {
+    const leads = await prisma.lead.findMany();
+    res.json({ leads });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 const leadSchema = z.object({
   name: z.string(),
+
   email: z.string().email(),
   status: z.enum([
     'new',
@@ -35,11 +41,14 @@ app.post('/api/lead', async (req: Request, res: Response) => {
     const lead = await prisma.lead.create({
       data: { name, email, status },
     });
-  } catch {
-    res.status(400).json({ message: 'Invalid request body' });
+    res.json({ message: 'Lead created successfully', lead });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      res.status(400).json({ message: error.issues });
+      return;
+    }
+    res.status(500).json({ message: 'Internal server error' });
   }
-
-  res.json({ message: 'Lead created successfully' });
 });
 
 app.listen(port, () => {
