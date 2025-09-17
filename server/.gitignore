@@ -106,3 +106,7 @@ logs
 # Build outputs
 dist/
 build/
+
+# Server-specific files
+uploads/
+temp/
