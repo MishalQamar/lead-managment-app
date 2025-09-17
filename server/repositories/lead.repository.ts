@@ -1,8 +1,12 @@
-import { PrismaClient, Status } from '@prisma/client';
+import { Status } from '../generated/prisma';
+import { prisma } from '../lib/prisma';
 
-const prisma = new PrismaClient();
+export const leadRepository = {
+  getLeads,
+  createLead,
+};
 
-export function getLeads() {
+function getLeads() {
   return prisma.lead.findMany();
 }
 
