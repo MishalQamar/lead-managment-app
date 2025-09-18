@@ -1,69 +1,104 @@
 # Lead Management App
 
-A full-stack application for managing leads with separate client and server components.
+A simple lead management application built with Next.js and Node.js.
 
 ## Project Structure
 
 ```
 lead-managment-app/
-├── client/          # Frontend application
-├── server/          # Backend API server
-├── .gitignore      # Git ignore rules
-└── README.md       # This file
+├── client/          # Next.js frontend
+├── server/          # Node.js backend with Express
+└── README.md
 ```
 
-## Getting Started
+## Tech Stack
+
+**Frontend:**
+- Next.js with TypeScript
+- Tailwind CSS
+- React Hook Form with Zod validation
+- TanStack Query for data fetching
+
+**Backend:**
+- Node.js with Express
+- TypeScript
+- Prisma ORM
+- PostgreSQL database
+
+## Features
+
+- View all leads in a responsive table
+- Add new leads with form validation
+- Lead status management (New, Engaged, Closed Won, Closed Lost)
+- Mobile-responsive design
+
+## Local Development
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
+- PostgreSQL database
 - npm or yarn
 
-### Installation
+### Setup
 
-1. Clone the repository
-2. Install dependencies for both client and server:
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd lead-managment-app
+   ```
 
-```bash
-# Install server dependencies
-cd server
-npm install
+2. **Backend Setup**
+   ```bash
+   cd server
+   npm install
+   ```
 
-# Install client dependencies
-cd ../client
-npm install
-```
+   Create `.env` file in server directory:
+   ```env
+   DATABASE_URL="your-postgresql-connection-string"
+   ```
+
+   Setup database:
+   ```bash
+   npm run db:push
+   npm run db:seed
+   ```
+
+3. **Frontend Setup**
+   ```bash
+   cd ../client
+   npm install
+   ```
 
 ### Running the Application
 
-#### Server
-```bash
-cd server
-npm start
+1. **Start the backend server:**
+   ```bash
+   cd server
+   npm run dev
+   ```
+   Server runs on `http://localhost:8000`
+
+2. **Start the frontend:**
+   ```bash
+   cd client
+   npm run dev
+   ```
+   Frontend runs on `http://localhost:3000`
+
+## API Endpoints
+
+- `GET /api/leads` - Get all leads
+- `POST /api/leads` - Create a new lead
+
+## Lead Schema
+
+```typescript
+{
+  id: string
+  name: string (required)
+  email: string (required, unique)
+  status: "new" | "engaged" | "closed_won" | "closed_lost"
+  createdAt: Date
+}
 ```
-
-#### Client
-```bash
-cd client
-npm start
-```
-
-## Development
-
-- Server runs on port 3000 (configurable via environment variables)
-- Client runs on port 3001 (or next available port)
-
-## Environment Variables
-
-Create a `.env` file in the server directory with the following variables:
-
-```
-PORT=3000
-NODE_ENV=development
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
