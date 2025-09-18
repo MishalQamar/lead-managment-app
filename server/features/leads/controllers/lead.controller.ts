@@ -28,6 +28,13 @@ async function createLead(req: Request, res: Response) {
       res.status(400).json({ message: error.issues });
       return;
     }
+    if (
+      error instanceof Error &&
+      error.message === 'Email already exists'
+    ) {
+      res.status(409).json({ message: 'Email already exists' });
+      return;
+    }
     res.status(500).json({ message: 'Internal server error' });
   }
 }
