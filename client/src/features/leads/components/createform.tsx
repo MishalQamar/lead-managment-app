@@ -22,6 +22,7 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -67,7 +68,10 @@ export function CreateForm() {
     );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `HTTP error! status: ${response.status}`
+      );
     }
 
     return response.json();
@@ -76,12 +80,11 @@ export function CreateForm() {
   const mutation = useMutation({
     mutationFn: createLead,
     onError: (error) => {
-      console.error('Failed to create lead:', error);
+      toast.error(`Failed to create lead: ${error.message}`);
     },
-    onSuccess: (data) => {
-      console.log('Lead created successfully:', data);
+    onSuccess: () => {
+      toast.success('Lead created successfully');
       form.reset();
-      // Invalidate and refetch leads list
       queryClient.invalidateQueries({ queryKey: ['leads'] });
     },
   });
