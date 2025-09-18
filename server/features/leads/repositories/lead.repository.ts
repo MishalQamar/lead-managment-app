@@ -6,8 +6,12 @@ export const leadRepository = {
   createLead,
 };
 
-function getLeads() {
-  return prisma.lead.findMany();
+async function getLeads() {
+  return prisma.lead.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 }
 
 async function createLead(
