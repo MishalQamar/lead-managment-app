@@ -5,7 +5,7 @@ A simple lead management application built with Next.js and Node.js.
 ## Live Demo
 
 - **Frontend**: [https://lead-managment-app-sigma.vercel.app/](https://lead-managment-app-sigma.vercel.app/)
-- **Backend API**: [https://lead-managment-app.onrender.com](https://lead-managment-app.onrender.com)
+- **Backend API**: [https://lead-managment-app.onrender.com/api/leads](https://lead-managment-app.onrender.com/api/leads)
 
 ## Project Structure
 
@@ -82,14 +82,14 @@ lead-managment-app/
    cd server
    npm run dev
    ```
-   Server runs on `http://localhost:8000`
+   
 
 2. **Start the frontend:**
    ```bash
    cd client
    npm run dev
    ```
-   Frontend runs on `http://localhost:3000`
+   
 
 ## API Endpoints
 

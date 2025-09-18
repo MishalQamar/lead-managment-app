@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -45,6 +46,7 @@ const formSchema = z.object({
 
 export function CreateForm() {
   const queryClient = useQueryClient();
+  const [resetKey, setResetKey] = useState(0);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,6 +87,7 @@ export function CreateForm() {
     onSuccess: () => {
       toast.success('Lead created successfully');
       form.reset();
+      setResetKey((prev) => prev + 1); // Change key to force Select re-render
       queryClient.invalidateQueries({ queryKey: ['leads'] });
     },
   });
@@ -139,6 +142,7 @@ export function CreateForm() {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  key={resetKey}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select status" />
