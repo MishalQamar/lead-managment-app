@@ -19,17 +19,17 @@ async function main() {
     {
       name: 'Mike Chen',
       email: 'mike.chen@startup.io',
-      status: 'proposal_sent' as Status,
+      status: 'proposal' as Status,
     },
     {
       name: 'Emily Davis',
       email: 'emily.davis@enterprise.com',
-      status: 'closed_won' as Status,
+      status: 'won' as Status,
     },
     {
       name: 'Alex Rodriguez',
       email: 'alex.rodriguez@company.net',
-      status: 'closed_lost' as Status,
+      status: 'lost' as Status,
     },
     {
       name: 'Lisa Wang',
@@ -44,7 +44,7 @@ async function main() {
     {
       name: 'Maria Garcia',
       email: 'maria.garcia@firm.com',
-      status: 'proposal_sent' as Status,
+      status: 'proposal' as Status,
     },
   ];
 

@@ -95,6 +95,7 @@ export function CreateForm() {
         onSubmit={form.handleSubmit((values) =>
           mutation.mutate(values)
         )}
+        className="space-y-8"
       >
         <FormField
           control={form.control}
@@ -105,7 +106,6 @@ export function CreateForm() {
               <FormControl>
                 <Input placeholder="Enter name" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -124,7 +124,6 @@ export function CreateForm() {
                   {...field}
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -141,7 +140,7 @@ export function CreateForm() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger>
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -159,7 +158,6 @@ export function CreateForm() {
                   </SelectContent>
                 </Select>
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
