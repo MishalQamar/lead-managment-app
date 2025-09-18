@@ -1,3 +1,5 @@
+'use client';
+
 import { getLeads } from '@/features/leads/queries/get-leads';
 import { useQuery } from '@tanstack/react-query';
 
