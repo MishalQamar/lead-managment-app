@@ -1,6 +1,11 @@
-import { Leads } from '@/components/leads';
-import { LeadsList } from '@/components/leads-list';
+import { CreateForm } from '@/features/leads/components/createform';
+import { LeadsList } from '@/features/leads/components/leads-list';
 
 export default function Home() {
-  return <LeadsList />;
+  return (
+    <>
+      <CreateForm />
+      <LeadsList />
+    </>
+  );
 }
