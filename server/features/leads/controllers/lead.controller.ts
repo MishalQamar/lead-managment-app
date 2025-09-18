@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { leadRepository } from '../repositories/lead.repository';
 import { leadSchema } from '../schema/lead';
+import { fromErrorToResponse } from '../../../utils/from-error-to-response';
 
 export const leadController = {
   getLeads,
@@ -14,7 +15,10 @@ async function getLeads(req: Request, res: Response) {
     const leads = await leadRepository.getLeads();
     res.json({ leads });
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    const errorResponse = fromErrorToResponse(error);
+    res
+      .status(errorResponse.status)
+      .json({ message: errorResponse.message });
   }
 }
 
@@ -24,17 +28,9 @@ async function createLead(req: Request, res: Response) {
     const lead = await leadRepository.createLead(name, email, status);
     res.json({ message: 'Lead created successfully', lead });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      res.status(400).json({ message: error.issues });
-      return;
-    }
-    if (
-      error instanceof Error &&
-      error.message === 'Email already exists'
-    ) {
-      res.status(409).json({ message: 'Email already exists' });
-      return;
-    }
-    res.status(500).json({ message: 'Internal server error' });
+    const errorResponse = fromErrorToResponse(error);
+    res
+      .status(errorResponse.status)
+      .json({ message: errorResponse.message });
   }
 }
